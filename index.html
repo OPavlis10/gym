@@ -22,6 +22,7 @@
         header h1 {
             font-size: 3em;
             margin: 0;
+            color: black; /* Černý text pro název */
         }
         .mode-toggle {
             display: flex;
@@ -72,7 +73,7 @@
         .category h3 {
             margin: 10px 0;
             font-size: 1.5em;
-            color: #f39c12; /* Golden color */
+            color: black; /* Černý text pro název kategorie */
         }
         .category img {
             width: 100%;
@@ -95,6 +96,14 @@
         }
         .category a:hover {
             opacity: 0.8;
+        }
+
+        /* Text pro cviky v Gym a Home */
+        .gym-mode .category h4, .gym-mode .category p {
+            color: #3498db; /* Modrá pro cviky v Gym */
+        }
+        .home-mode .category h4, .home-mode .category p {
+            color: #2ecc71; /* Zelená pro cviky v Home */
         }
     </style>
 </head>
@@ -202,7 +211,7 @@
             exercises.forEach(exercise => {
                 exercisesHtml += `
                     <div class="category ${type}-mode">
-                        <h3>${exercise.name}</h3>
+                        <h4>${exercise.name}</h4>
                         <img src="${exercise.image}" alt="${exercise.name}">
                     </div>
                 `;
