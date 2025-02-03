@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Cviky</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Fitness Cviky</h1>
+            <div class="mode-toggle">
+                <button onclick="switchMode()">Switch Dark Mode</button>
+            </div>
+        </div>
+        <div class="main-options">
+            <button onclick="showExercises('gym')">Gym</button>
+            <button onclick="showExercises('home')">Home</button>
+        </div>
+
+        <div id="exercises" class="exercises"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
