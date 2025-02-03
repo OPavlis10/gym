@@ -31,7 +31,6 @@
         .mode-toggle button {
             width: 200px; /* Širší tlačítka */
             padding: 15px;
-            background-color: #3498db; /* Modrá barva */
             color: white;
             border: none;
             cursor: pointer;
@@ -41,8 +40,17 @@
             border-radius: 30px; /* Zaoblení */
             transition: background-color 0.3s;
         }
+        .gym-mode button {
+            background-color: #3498db; /* Modrá pro Gym */
+        }
+        .home-mode button {
+            background-color: #2ecc71; /* Zelená pro Home */
+        }
         .mode-toggle button:hover {
-            background-color: #2980b9; /* Tmavší modrá */
+            background-color: #2980b9; /* Tmavší modrá pro Gym */
+        }
+        .mode-toggle button.home-mode:hover {
+            background-color: #27ae60; /* Tmavší zelená pro Home */
         }
         .container {
             display: flex;
@@ -74,14 +82,19 @@
         .category a {
             display: inline-block;
             padding: 10px;
-            background-color: #f39c12;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             margin-top: 15px;
         }
+        .gym-mode .category a {
+            background-color: #3498db; /* Modrá pro Gym */
+        }
+        .home-mode .category a {
+            background-color: #2ecc71; /* Zelená pro Home */
+        }
         .category a:hover {
-            background-color: #e67e22;
+            opacity: 0.8;
         }
     </style>
 </head>
@@ -94,8 +107,8 @@
 
     <!-- Možnosti: Gym / Home -->
     <div class="mode-toggle">
-        <button onclick="showBodyParts('gym')">Gym</button>
-        <button onclick="showBodyParts('home')">Home</button>
+        <button class="gym-mode" onclick="showBodyParts('gym')">Gym</button>
+        <button class="home-mode" onclick="showBodyParts('home')">Home</button>
     </div>
 
     <!-- Výběr částí těla -->
@@ -172,7 +185,7 @@
             // Přidání kategorií (ruky, nohy, břišáky, záda)
             for (const part in bodyParts) {
                 bodyPartsHtml += `
-                    <div class="category">
+                    <div class="category ${type}-mode">
                         <h3>${capitalizeFirstLetter(part)}</h3>
                         <a href="javascript:void(0);" onclick="showExercises('${type}', '${part}')">Zobrazit cviky</a>
                     </div>
@@ -188,7 +201,7 @@
 
             exercises.forEach(exercise => {
                 exercisesHtml += `
-                    <div class="category">
+                    <div class="category ${type}-mode">
                         <h3>${exercise.name}</h3>
                         <img src="${exercise.image}" alt="${exercise.name}">
                     </div>
