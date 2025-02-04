@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Cviky</title>
+    <title>Fitness Cviky a Jídlo</title>
     <!-- Google Fonty -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -48,6 +48,9 @@
         .home-mode {
             background-color: #2ecc71; /* Zelená pro Home */
         }
+        .food-mode {
+            background-color: #9b59b6; /* Fialová pro Jídlo */
+        }
         .container {
             display: flex;
             justify-content: center;
@@ -89,10 +92,12 @@
         .home-mode .category a {
             background-color: #2ecc71; /* Zelená pro Home */
         }
+        .food-mode .category a {
+            background-color: #9b59b6; /* Fialová pro Jídlo */
+        }
         .category a:hover {
             opacity: 0.8;
         }
-
         /* Text pro cviky v Gym a Home */
         .gym-mode .category h4, .gym-mode .category p {
             color: #3498db; /* Modrá pro cviky v Gym */
@@ -100,22 +105,27 @@
         .home-mode .category h4, .home-mode .category p {
             color: #2ecc71; /* Zelená pro cviky v Home */
         }
+        /* Text pro jídla v Jídlo */
+        .food-mode .category h4, .food-mode .category p {
+            color: #9b59b6; /* Fialová pro jídla v Jídlo */
+        }
     </style>
 </head>
 <body>
 
     <!-- Hlavička -->
     <header>
-        <h1>Fitness Cviky</h1>
+        <h1>Fitness Cviky a Jídlo</h1>
     </header>
 
-    <!-- Možnosti: Gym / Home -->
+    <!-- Možnosti: Gym / Home / Jídlo -->
     <div class="mode-toggle">
         <button class="gym-mode" onclick="showBodyParts('gym')">Gym</button>
         <button class="home-mode" onclick="showBodyParts('home')">Home</button>
+        <button class="food-mode" onclick="showFoodOptions()">Jídlo</button>
     </div>
 
-    <!-- Výběr částí těla -->
+    <!-- Výběr částí těla nebo jídla -->
     <div id="body-parts" class="container"></div>
 
     <script>
@@ -167,7 +177,7 @@
                 ],
                 abs: [
                     {name: 'Crunches', image: 'pic11.jpg'},
-                    {name: 'Leg Raises', image: '26.jpeg'},
+                    {name: 'Leg Raises', image: 'pic26.jpeg'},
                     {name: 'Russian Twists', image: 'pic14.jpg'},
                     {name: 'Mountain Climbers', image: 'pic15.tiff'},
                     {name: 'Plank (Modified)', image: 'pic7.jpeg'}
@@ -180,6 +190,23 @@
                     {name: 'Prone Cobra', image: 'pic31.png'}
                 ]
             }
+        };
+
+        const foodData = {
+            weightLoss: [
+                {name: 'Salát s kuřecím masem', image: 'food1.jpg'},
+                {name: 'Grilovaná zelenina', image: 'food2.jpg'},
+                {name: 'Quinoa s avokádem', image: 'food3.jpg'},
+                {name: 'Tvaroh s ořechy', image: 'food4.jpg'},
+                {name: 'Smoothie z bobulí', image: 'food5.jpg'}
+            ],
+            muscleGain: [
+                {name: 'Kuřecí prsa s rýží', image: 'food6.jpg'},
+                {name: 'Hovězí steak s bramborami', image: 'food7.jpg'},
+                {name: 'Losos s quinou', image: 'food8.jpg'},
+                {name: 'Proteinový shake', image: 'food9.jpg'},
+                {name: 'Ovesné vločky s proteinem', image: 'food10.jpg'}
+            ]
         };
 
         function showBodyParts(type) {
@@ -213,6 +240,36 @@
             });
 
             document.getElementById('body-parts').innerHTML = exercisesHtml;
+        }
+
+        function showFoodOptions() {
+            let foodOptionsHtml = `
+                <div class="category food-mode">
+                    <h3>Na zhubnutí</h3>
+                    <a href="javascript:void(0);" onclick="showFood('weightLoss')">Zobrazit jídla</a>
+                </div>
+                <div class="category food-mode">
+                    <h3>Na svaly</h3>
+                    <a href="javascript:void(0);" onclick="showFood('muscleGain')">Zobrazit jídla</a>
+                </div>
+            `;
+            document.getElementById('body-parts').innerHTML = foodOptionsHtml;
+        }
+
+        function showFood(type) {
+            let foodHtml = '';
+            const foods = foodData[type];
+
+            foods.forEach(food => {
+                foodHtml += `
+                    <div class="category food-mode">
+                        <h4>${food.name}</h4>
+                        <img src="${food.image}" alt="${food.name}">
+                    </div>
+                `;
+            });
+
+            document.getElementById('body-parts').innerHTML = foodHtml;
         }
 
         function capitalizeFirstLetter(string) {
