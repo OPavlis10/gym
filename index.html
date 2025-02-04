@@ -22,7 +22,7 @@
         header h1 {
             font-size: 3em;
             margin: 0;
-            color: black; /* Černý text pro název */
+            color: white; /* Bílý text pro název */
         }
         .mode-toggle {
             display: flex;
@@ -48,10 +48,7 @@
             background-color: #2ecc71; /* Zelená pro Home */
         }
         .mode-toggle button:hover {
-            background-color: #2980b9; /* Tmavší modrá pro Gym */
-        }
-        .mode-toggle button.home-mode:hover {
-            background-color: #27ae60; /* Tmavší zelená pro Home */
+            opacity: 0.8; /* Efekt při najetí myší */
         }
         .container {
             display: flex;
@@ -70,10 +67,10 @@
         .category:hover {
             transform: translateY(-10px);
         }
-        .category h3 {
+        .category h3, .category h4 {
             margin: 10px 0;
             font-size: 1.5em;
-            color: black; /* Černý text pro název kategorie */
+            color: white; /* Bílý text pro názvy kategorií a cviků */
         }
         .category img {
             width: 100%;
@@ -97,7 +94,6 @@
         .category a:hover {
             opacity: 0.8;
         }
-
         /* Text pro cviky v Gym a Home */
         .gym-mode .category h4, .gym-mode .category p {
             color: #3498db; /* Modrá pro cviky v Gym */
@@ -105,9 +101,23 @@
         .home-mode .category h4, .home-mode .category p {
             color: #2ecc71; /* Zelená pro cviky v Home */
         }
+        /* Přepínání mezi světlým a tmavým módem */
+        .light-mode {
+            background-color: #f0f0f0; /* Světlý background */
+            color: black; /* Černý text */
+        }
+        .light-mode header {
+            background-color: #ddd; /* Světlý background pro header */
+        }
+        .light-mode .category {
+            background-color: #eee; /* Světlý background pro kategorie */
+        }
+        .light-mode .gym-mode .category h4, .light-mode .home-mode .category h4 {
+            color: black; /* Černý text pro názvy cviků ve světlém módu */
+        }
     </style>
 </head>
-<body>
+<body class="dark-mode">
 
     <!-- Hlavička -->
     <header>
@@ -119,6 +129,11 @@
         <button class="gym-mode" onclick="showBodyParts('gym')">Gym</button>
         <button class="home-mode" onclick="showBodyParts('home')">Home</button>
     </div>
+    
+    <!-- Přepínač módů -->
+    <div class="mode-toggle">
+        <button onclick="toggleMode()">Přepnout mód</button>
+    </div>
 
     <!-- Výběr částí těla -->
     <div id="body-parts" class="container"></div>
@@ -128,61 +143,37 @@
             gym: {
                 arms: [
                     {name: 'Bicep Curls', image: 'pic1.png'},
-                    {name: 'Tricep Dips', image: 'pic2.jpg'},
-                    {name: 'Hammer Curl', image: 'pic3.tiff'},
-                    {name: 'Chest Press', image: 'pic4.jpg.png'},
-                    {name: 'Lat Pulldown', image: 'pic5.png'}
+                    {name: 'Tricep Dips', image: 'pic2.jpg'}
                 ],
                 legs: [
                     {name: 'Squats', image: 'pic6.tiff'},
-                    {name: 'Lunges', image: 'pic7.jpeg'},
-                    {name: 'Leg Press', image: 'pic8.tiff'},
-                    {name: 'Deadlifts', image: 'pic9.tiff'},
-                    {name: 'Calf Raises', image: 'pic10.tiff'}
+                    {name: 'Lunges', image: 'pic7.jpeg'}
                 ],
                 abs: [
                     {name: 'Crunches', image: 'pic11.jpg'},
-                    {name: 'Leg Raises', image: 'pic12.jpeg'},
-                    {name: 'Plank', image: 'pic13.png'},
-                    {name: 'Russian Twists', image: 'pic14.jpg'},
-                    {name: 'Mountain Climbers', image: 'pic15.tiff'}
+                    {name: 'Leg Raises', image: 'pic12.jpeg'}
                 ],
                 back: [
                     {name: 'Deadlifts', image: 'pic9.tiff'},
-                    {name: 'Pull-ups', image: 'pic16.jpeg'},
-                    {name: 'Bent-over Row', image: 'pic17.tiff'},
-                    {name: 'Lat Pulldown', image: 'pic5.png'},
-                    {name: 'T-Bar Row', image: 'pic18.jpg'}
+                    {name: 'Pull-ups', image: 'pic16.jpeg'}
                 ]
             },
             home: {
                 arms: [
                     {name: 'Push-ups', image: 'pic19.tiff'},
-                    {name: 'Tricep Dips (chair)', image: 'pic20.jpg'},
-                    {name: 'Plank', image: 'pic13.png'},
-                    {name: 'Diamond Push-ups', image: 'pic21.tiff'},
-                    {name: 'Arm Circles', image: 'pic22.png'}
+                    {name: 'Tricep Dips (chair)', image: 'pic20.jpg'}
                 ],
                 legs: [
                     {name: 'Bodyweight Squats', image: 'pic23.jpeg'},
-                    {name: 'Lunges', image: 'pic7.jpeg'},
-                    {name: 'Jump Squats', image: 'pic23.jpeg'},
-                    {name: 'Step-ups (chair)', image: 'pic24.jpeg'},
-                    {name: 'Glute Bridges', image: 'pic25.jpeg'}
+                    {name: 'Lunges', image: 'pic7.jpeg'}
                 ],
                 abs: [
                     {name: 'Crunches', image: 'pic11.jpg'},
-                    {name: 'Leg Raises', image: 'pic26.jpeg'},
-                    {name: 'Russian Twists', image: 'pic14.jpg'},
-                    {name: 'Mountain Climbers', image: 'pic15.tiff'},
-                    {name: 'Plank (Modified)', image: 'pic7.jpeg'}
+                    {name: 'Leg Raises', image: 'pic26.jpeg'}
                 ],
                 back: [
                     {name: 'Superman Exercise', image: 'pic27.jpeg'},
-                    {name: 'Bird-dog', image: 'pic28.gif'},
-                    {name: 'Back Extensions', image: 'pic29.jpeg'},
-                    {name: 'Glute Bridge', image: 'pic30.jpg'},
-                    {name: 'Prone Cobra', image: 'pic31.png'}
+                    {name: 'Bird-dog', image: 'pic28.gif'}
                 ]
             }
         };
@@ -222,6 +213,17 @@
 
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        function toggleMode() {
+            const body = document.body;
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+            } else {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+            }
         }
     </script>
 
