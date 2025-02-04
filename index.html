@@ -30,12 +30,13 @@
             margin-top: 20px;
         }
         .mode-toggle button {
-            width: 200px; /* Širší tlačítka */
+            width: 600px; /* 3x větší tlačítka */
+            height: 100px; /* 3x větší tlačítka */
             padding: 15px;
             color: white;
             border: none;
             cursor: pointer;
-            font-size: 1.2em;
+            font-size: 2.4em; /* Větší text */
             text-align: center;
             margin: 0 10px;
             border-radius: 30px; /* Zaoblení */
@@ -67,10 +68,10 @@
         .category:hover {
             transform: translateY(-10px);
         }
-        .category h3, .category h4 {
+        .category h3 {
             margin: 10px 0;
             font-size: 1.5em;
-            color: white; /* Bílý text pro názvy kategorií a cviků */
+            color: white; /* Bílý text pro názvy kategorií */
         }
         .category img {
             width: 100%;
@@ -101,23 +102,9 @@
         .home-mode .category h4, .home-mode .category p {
             color: #2ecc71; /* Zelená pro cviky v Home */
         }
-        /* Přepínání mezi světlým a tmavým módem */
-        .light-mode {
-            background-color: #f0f0f0; /* Světlý background */
-            color: black; /* Černý text */
-        }
-        .light-mode header {
-            background-color: #ddd; /* Světlý background pro header */
-        }
-        .light-mode .category {
-            background-color: #eee; /* Světlý background pro kategorie */
-        }
-        .light-mode .gym-mode .category h4, .light-mode .home-mode .category h4 {
-            color: black; /* Černý text pro názvy cviků ve světlém módu */
-        }
     </style>
 </head>
-<body class="dark-mode">
+<body>
 
     <!-- Hlavička -->
     <header>
@@ -128,11 +115,6 @@
     <div class="mode-toggle">
         <button class="gym-mode" onclick="showBodyParts('gym')">Gym</button>
         <button class="home-mode" onclick="showBodyParts('home')">Home</button>
-    </div>
-    
-    <!-- Přepínač módů -->
-    <div class="mode-toggle">
-        <button onclick="toggleMode()">Přepnout mód</button>
     </div>
 
     <!-- Výběr částí těla -->
@@ -213,17 +195,6 @@
 
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-
-        function toggleMode() {
-            const body = document.body;
-            if (body.classList.contains('dark-mode')) {
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-            } else {
-                body.classList.remove('light-mode');
-                body.classList.add('dark-mode');
-            }
         }
     </script>
 
