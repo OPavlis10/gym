@@ -45,11 +45,11 @@
         .gym-mode {
             background-color: #3498db; /* Modrá pro Gym */
         }
-        .home-mode {
-            background-color: #2ecc71; /* Zelená pro Home */
-        }
         .food-mode {
             background-color: #9b59b6; /* Fialová pro Jídlo */
+        }
+        .home-mode {
+            background-color: #2ecc71; /* Zelená pro Home */
         }
         .container {
             display: flex;
@@ -118,11 +118,11 @@
         <h1>Fitness Cviky a Jídlo</h1>
     </header>
 
-    <!-- Možnosti: Gym / Home / Jídlo -->
+    <!-- Možnosti: Gym / Jídlo / Home -->
     <div class="mode-toggle">
         <button class="gym-mode" onclick="showBodyParts('gym')">Gym</button>
-        <button class="home-mode" onclick="showBodyParts('home')">Home</button>
         <button class="food-mode" onclick="showFoodOptions()">Jídlo</button>
+        <button class="home-mode" onclick="showBodyParts('home')">Home</button>
     </div>
 
     <!-- Výběr částí těla nebo jídla -->
@@ -194,18 +194,18 @@
 
         const foodData = {
             weightLoss: [
-                {name: 'Salát s kuřecím masem', image: 'food1.jpg'},
-                {name: 'Grilovaná zelenina', image: 'food2.jpg'},
-                {name: 'Quinoa s avokádem', image: 'food3.jpg'},
-                {name: 'Tvaroh s ořechy', image: 'food4.jpg'},
-                {name: 'Smoothie z bobulí', image: 'food5.jpg'}
+                {name: 'Salát s kuřecím masem', recipe: 'Smíchejte salát, kuře, rajčata, okurku a dresink.'},
+                {name: 'Grilovaná zelenina', recipe: 'Grilujte papriky, cukety a lilek s olivovým olejem.'},
+                {name: 'Quinoa s avokádem', recipe: 'Uvařte quinou a smíchejte s avokádem, rajčaty a citronem.'},
+                {name: 'Tvaroh s ořechy', recipe: 'Smíchejte tvaroh s medem a posypte ořechy.'},
+                {name: 'Smoothie z bobulí', recipe: 'Mixujte jahody, borůvky, banán a jogurt.'}
             ],
             muscleGain: [
-                {name: 'Kuřecí prsa s rýží', image: 'food6.jpg'},
-                {name: 'Hovězí steak s bramborami', image: 'food7.jpg'},
-                {name: 'Losos s quinou', image: 'food8.jpg'},
-                {name: 'Proteinový shake', image: 'food9.jpg'},
-                {name: 'Ovesné vločky s proteinem', image: 'food10.jpg'}
+                {name: 'Kuřecí prsa s rýží', recipe: 'Pečte kuřecí prsa a podávejte s vařenou rýží a brokolicí.'},
+                {name: 'Hovězí steak s bramborami', recipe: 'Grilujte steak a podávejte s pečenými bramborami.'},
+                {name: 'Losos s quinou', recipe: 'Pečte lososa a podávejte s quinou a špenátem.'},
+                {name: 'Proteinový shake', recipe: 'Mixujte proteinový prášek, banán, mléko a arašídové máslo.'},
+                {name: 'Ovesné vločky s proteinem', recipe: 'Vařte ovesné vločky a přidejte proteinový prášek a ovoce.'}
             ]
         };
 
@@ -264,7 +264,7 @@
                 foodHtml += `
                     <div class="category food-mode">
                         <h4>${food.name}</h4>
-                        <img src="${food.image}" alt="${food.name}">
+                        <p>${food.recipe}</p>
                     </div>
                 `;
             });
